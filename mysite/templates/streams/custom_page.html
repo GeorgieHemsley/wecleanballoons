@@ -1,0 +1,12 @@
+{% load wagtailimages_tags %}
+
+<div class="row justify-content-center">
+    <div class="row pt-4">
+        <a href="{{self.url}}" 
+            class="btn btn-primary btn-lg" 
+            style="padding-left: 3rem; padding-right: 3rem;">
+                {{self.link_text}}
+                {{self.title}}
+        </a>
+    </div>
+</div>

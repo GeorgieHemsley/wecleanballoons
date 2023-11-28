@@ -1,0 +1,109 @@
+
+{% load menu_tags static wagtailcore_tags cache %}
+{% get_menu "header" as navigation %}
+
+<footer class="bg-primary text-white text-center text-md-start">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        {% cache 2592000 footer_content %}
+          {% if settings.site_settings.FooterContent.title %}
+            <h5 class="text-uppercase">{{settings.site_settings.FooterContent.title}}</h5>
+          {% endif %}
+
+            {% if settings.site_settings.FooterContent.content %}
+            <p>
+              {{settings.site_settings.FooterContent.content|richtext}}
+            </p>
+            {% endif %}
+        {% endcache %}
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Links</h5>
+
+          <ul class="list-unstyled mb-0">
+          {% cache 2592000 site_footer %}
+            {% for item in navigation.menu_items.all %}
+              <li>
+                <a href="{{item.link}}" {% if item.open_in_new_tab %}target="_blank"{% endif %} class="text-white">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          {% endcache %}
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        {% cache 2592000 social_media_settings %}
+          <h5 class="text-uppercase">Contact Us</h5>
+          <ul class="list-unstyled mb-0">
+            <li>
+              {% if settings.site_settings.SocialMediaSettings.github %}
+              <a href="{{settings.site_settings.SocialMediaSettings.github}}" class="text-white">
+                <img src="{% static 'images/github.svg' %}" alt="GitHub">
+              </a>
+              {% endif %}
+              {% if settings.site_settings.SocialMediaSettings.linkedin %}
+              <a href="{{settings.site_settings.SocialMediaSettings.linkedin}}" class="text-white">
+                <img src="{% static 'images/linkedin.svg' %}" alt="LinkedIn">
+              </a>
+              {% endif %}
+              {% if settings.site_settings.SocialMediaSettings.facebook %}
+              <a href="{{settings.site_settings.SocialMediaSettings.facebook}}" class="text-white">
+                <img src="{% static 'images/facebook.svg' %}" alt="Facebook">
+              </a>
+              {% endif %}
+              {% if settings.site_settings.SocialMediaSettings.instagram %}
+              <a href="{{settings.site_settings.SocialMediaSettings.instagram}}" class="text-white">
+                <img src="{% static 'images/instagram.svg' %}" alt="Instagram">
+              </a>
+              {% endif %}
+            </li>
+          </ul>
+        {% endcache %}
+          <br />
+        {% cache 2592000 email_settings %}
+          <div class="col-lg col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled mb-0">
+              <li>
+                {% if settings.site_settings.EmailSettings.email %}
+                <a href="mailto:{{settings.site_settings.EmailSettings.email}}" class="text-white">
+                  <img src="{% static 'images/email.png' %}" alt="@">
+                    <span class="small">
+                    {% if settings.site_settings.EmailSettings.show_email %} 
+                      {{settings.site_settings.EmailSettings.email}}
+                    {% else %}
+                    <span class="text-white">
+                      Email Us
+                    </span>
+                    {% endif %}
+                </a>
+                {% endif %}
+              </li>
+            </ul>
+          </div>
+        {% endcache %}
+        </div>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2020 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>

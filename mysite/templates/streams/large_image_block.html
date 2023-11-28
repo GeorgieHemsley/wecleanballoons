@@ -1,0 +1,15 @@
+{% load wagtailimages_tags %}
+
+{% image self fill-1000x800 as img %}
+{% image self fill-1000x800 format-webp as webp_img %}
+
+
+<div class="row my-6" style="text-align: center;">
+    <div class="col-sm-12">
+        <picture>
+            <source srcset="{{webp_img.url}}" type="image/webp">
+            <img src="{{webp_img.url}}" alt="img.alt">
+            <!--<img src="{{ img.url }}" alt="{{ img.alt }}" style="height: auto;">-->
+        </picture>
+    </div>
+</div>
